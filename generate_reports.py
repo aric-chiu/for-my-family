@@ -16,6 +16,7 @@ STOCK_NAMES = {
     "6405": "悅城科技",
     "6509": "聚和國際",
     "7709": "榮田精機",
+    "MU": "美光科技",
 }
 
 INDEX_TEMPLATE = """<!DOCTYPE html>
@@ -66,7 +67,7 @@ INDEX_TEMPLATE = """<!DOCTYPE html>
 </html>"""
 
 # 掃描所有帶日期的報告 HTML
-pattern = re.compile(r'^(\d+)_analysis_(\d{8})\.html$')
+pattern = re.compile(r'^([A-Za-z0-9]+)_analysis_(\d{8})\.html$')
 by_date = defaultdict(list)
 
 for fname in os.listdir(REPORTS_DIR):
