@@ -17,6 +17,7 @@ STOCK_NAMES = {
     "6509": "聚和國際",
     "7709": "榮田精機",
     "MU": "美光科技",
+    "NVDA": "輝達",
 }
 
 INDEX_TEMPLATE = """<!DOCTYPE html>
