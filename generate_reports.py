@@ -1,61 +1,22 @@
 # -*- coding: utf-8 -*-
 """
-產出分析報告 HTML 並建立首頁索引。
-將結果放在 gh-pages/ 下，供推送至 GitHub Pages。
+掃描 gh-pages/ 下所有 {code}_analysis_{YYYYMMDD}.html，
+自動產出按日期分組的首頁索引 index.html。
+新報告由分析流程直接產出帶日期的 HTML，本腳本只負責重建索引。
 """
-import sys, io, os, glob, markdown
+import sys, io, os, re, glob
+from collections import defaultdict
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
 
 REPORTS_DIR = os.path.dirname(os.path.abspath(__file__))
 
-HTML_TEMPLATE = """<!DOCTYPE html>
-<html lang="zh-TW">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>{title}</title>
-<style>
-  body {{
-    font-family: -apple-system, "Microsoft JhengHei", "Segoe UI", sans-serif;
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 20px;
-    background: #f8f9fa;
-    color: #333;
-    line-height: 1.6;
-  }}
-  h1 {{ color: #1a73e8; border-bottom: 2px solid #1a73e8; padding-bottom: 8px; }}
-  h2 {{ color: #333; margin-top: 28px; }}
-  h3 {{ color: #555; }}
-  table {{
-    border-collapse: collapse;
-    width: 100%;
-    margin: 12px 0;
-    font-size: 14px;
-  }}
-  th, td {{
-    border: 1px solid #ddd;
-    padding: 8px 12px;
-    text-align: left;
-  }}
-  th {{ background: #1a73e8; color: white; }}
-  tr:nth-child(even) {{ background: #f2f2f2; }}
-  code {{ background: #e8e8e8; padding: 2px 6px; border-radius: 3px; font-size: 13px; }}
-  pre {{ background: #272822; color: #f8f8f2; padding: 16px; border-radius: 6px; overflow-x: auto; }}
-  .buy {{ color: #d32f2f; font-weight: bold; }}
-  .sell {{ color: #388e3c; font-weight: bold; }}
-  .nav {{ margin-bottom: 20px; }}
-  .nav a {{ color: #1a73e8; text-decoration: none; }}
-  .nav a:hover {{ text-decoration: underline; }}
-  .footer {{ margin-top: 40px; padding-top: 16px; border-top: 1px solid #ddd; color: #888; font-size: 12px; }}
-</style>
-</head>
-<body>
-<div class="nav"><a href="index.html">← 首頁</a></div>
-{content}
-<div class="footer">箱波均控盤戰法分析報告 · 由 Claude Code 自動產出</div>
-</body>
-</html>"""
+# 股票名稱對照（新股票分析時會自動加入）
+STOCK_NAMES = {
+    "2367": "燿華電子",
+    "6405": "悅城科技",
+    "6509": "聚和國際",
+    "7709": "榮田精機",
+}
 
 INDEX_TEMPLATE = """<!DOCTYPE html>
 <html lang="zh-TW">
@@ -74,278 +35,61 @@ INDEX_TEMPLATE = """<!DOCTYPE html>
     line-height: 1.6;
   }}
   h1 {{ color: #1a73e8; border-bottom: 2px solid #1a73e8; padding-bottom: 8px; }}
+  h2 {{ color: #444; margin-top: 32px; border-left: 4px solid #1a73e8; padding-left: 12px; }}
   .card {{
     background: white;
     border-radius: 8px;
-    padding: 16px 20px;
-    margin: 12px 0;
+    padding: 12px 20px;
+    margin: 8px 0;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }}
   .card a {{
     color: #1a73e8;
     text-decoration: none;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: bold;
   }}
   .card a:hover {{ text-decoration: underline; }}
-  .card .date {{ color: #888; font-size: 13px; margin-top: 4px; }}
+  .card .code {{ color: #888; font-size: 13px; }}
   .footer {{ margin-top: 40px; padding-top: 16px; border-top: 1px solid #ddd; color: #888; font-size: 12px; }}
 </style>
 </head>
 <body>
 <h1>📊 股票分析報告</h1>
 <p>箱波均控盤戰法 · 分析報告索引</p>
-{cards}
+{sections}
 <div class="footer">箱波均控盤戰法分析報告 · 由 Claude Code 自動產出</div>
 </body>
 </html>"""
 
-# 各股報告 (markdown 內容)
-reports = {}
+# 掃描所有帶日期的報告 HTML
+pattern = re.compile(r'^(\d+)_analysis_(\d{8})\.html$')
+by_date = defaultdict(list)
 
-reports["2367"] = {
-    "name": "2367 燿華電子",
-    "date": "2026-04-11",
-    "md": """
-## 股票：2367（燿華電子 Unitech Printed Circuit Board Corp.）
-**分析日期：2026-04-11**
+for fname in os.listdir(REPORTS_DIR):
+    m = pattern.match(fname)
+    if m:
+        code, date_str = m.group(1), m.group(2)
+        display_date = f"{date_str[:4]}-{date_str[4:6]}-{date_str[6:]}"
+        name = STOCK_NAMES.get(code, code)
+        by_date[display_date].append((code, name, fname))
 
-### 一、四時框趨勢總覽
+# 按日期降序排列（最新在上）
+sections_html = ""
+for date in sorted(by_date.keys(), reverse=True):
+    entries = sorted(by_date[date], key=lambda x: x[0])
+    sections_html += f"\n<h2>{date}</h2>\n"
+    for code, name, fname in entries:
+        sections_html += f"""<div class="card">
+  <a href="{fname}">{code} {name}</a>
+  <span class="code">{fname}</span>
+</div>\n"""
 
-| 時框 | 最新 | 收盤 | 趨勢 | 短均 | 中均 | 長均 | 次箱頂(b) | 次箱底(c) |
-|---|---|---|---|---|---|---|---|---|
-| **月** | 2026-04 | 75.00 | **上漲** | 71.00↑ | 39.67↑ | 27.15 | 30.11 | 24.40 |
-| **週** | 04-06 | 75.00 | **上漲** | 74.42↑ | 61.14↑ | 34.74 | 78.20 | 71.50 |
-| **日** | 04-10 | 75.00 | 盤整（b/c不同步） | 74.00↑ | 74.01↑ | 57.91 | 77.50 | 71.50 |
-| **60分** | 04/10 13:00 | 74.70 | 盤整（b/c不同步） | 75.18↑ | 74.18↓ | 74.52 | 78.60 | 72.70 |
-
-**長期多頭、短期盤整**：月線、週線皆為標準多頭（短/中/長均上揚、b/c 墊高），日線與 60 分線在高位盤整整理，日線 MA5 與 MA20 幾乎貼合（74.00 / 74.01）呈均線糾結。
-
-### 二、次箱結構（日線主判）
-
-- **當前上漲次箱**：頂 **77.50**（04/09 b）／底 **71.50**（04/02 c）
-- **前一止漲缺口**：78.20 → 74.50（3.70 元）—— 04/09 的 77.50 已收復大部分缺口但**尚未過 78.20 前高**
-- **次箱未被阻斷**：04/10 收 75.00 仍在 71.50 上方，第 6 招「一波修正不阻斷，趨勢動力依舊在」
-
-### 三、SOP 五步狀態
-
-| 步驟 | 狀態 |
-|---|---|
-| 1. 進場 | ✅ 2026 年初已完成（月/週線長多結構成立） |
-| 2. 試單（MA5 過不破） | ✅ MA5 持續上揚、基本波動多頭 |
-| 3. 加碼（MA20 過不破） | ✅ MA20 上揚、次級波動未阻斷 |
-| 4. 持有 | ✅ **目前階段**，日線次箱修正中 |
-| 5. 出場（破而不過） | 尚未觸發 |
-
-### 四、明日操作策略（2026-04-13，週一）
-
-**買進條件：**
-- 明日收盤**站上 77.50**（收過次箱頂 b）→ 次箱重建、趨勢延續，可**順勢買進或加碼**
-- 若能**直接過 78.20**（前高）→ 「過前高且不破底」第 5 招確立，多頭最強訊號
-
-**賣出條件：**
-- 明日收盤**跌破 71.50**（次箱底 c）→ 上漲波動被阻斷，**出場**
-- 警戒線：若收盤跌破 **73.50**（前一個 c 點）且之後未能重新站回，屬提前止損訊號
-
-**觀望條件：**
-- 收盤在 **71.50 ~ 77.50** 之間 → 次箱內盤整，第 13 招「箱頂箱底瀟灑走幾回」，持有不動
-- 今日收 75.00 位於次箱中段，**明日預設觀望等訊號**
-
-### 五、分析依據
-
-1. **月/週線長多結構完整**：MA3/MA12、MA4/MA13 雙均上揚，b/c 同步墊高
-2. **日線處於次箱盤整**：77.50 / 71.50 區間、MA5 與 MA20 糾結，屬第 13 招的盤整期
-3. **關鍵訊號位**：77.50（過 → 加碼）、71.50（破 → 出場）、78.20（過前高 → 最強多頭確認）
-4. **60 分線警訊**：短期 MA25 已翻下、出現 1.00 元止漲缺口，若日線次箱底 71.50 被破，60 分線會先於日線顯示訊號
-"""
-}
-
-reports["6405"] = {
-    "name": "6405 悅城科技",
-    "date": "2026-04-12",
-    "md": """
-## 股票：6405（悅城科技 Onano Industrial Corp.）
-**分析日期：2026-04-12**
-
-### 一、四時框趨勢總覽
-
-| 時框 | 最新 | 收盤 | 趨勢 | 短均 | 中均 | 長均 | 次箱頂(b) | 次箱底(c) |
-|---|---|---|---|---|---|---|---|---|
-| **月** | 2026-04 | 36.70 | **上漲** | 34.30↑ | 28.28↑ | 26.04 | 35.45 | 30.75 |
-| **週** | 04-06 | 36.70 | **上漲** | 33.69↑ | 32.06↑ | 27.29 | 37.15 | (尚未出現) |
-| **日** | 04-10 | 36.70 | **上漲** | 37.11↑ | 32.46↑ | 31.58 | 38.20 | 36.50 |
-| **60分** | 04/10 13:00 | 36.60 | 盤整 | 36.73↓ | 37.23↑ | 32.45 | 36.80 | 36.55 |
-
-**四時框中三個上漲、一個盤整**：月/週/日線全部是 b/c 同步墊高的標準多頭結構。僅 60 分線短期修正轉盤整。
-
-### 二、次箱結構（日線主判）
-
-- **當前上漲次箱**：頂 **38.20**（04/07 b）／底 **36.50**（04/09 c）
-- **前一上漲次箱底**：30.75（03/31），未被阻斷（36.50 >> 30.75）→ **第 6 招成立**
-- **止跌缺口**：30.75 → 36.50，落差 **5.75 元** → 上漲非常強勁
-- **回檔箱不重疊**：36.50 遠高於前箱底 30.75 → **第 10 招「回檔箱都不重疊，乘離雖大要抱牢」**
-
-### 三、SOP 五步狀態
-
-| 步驟 | 狀態 |
-|---|---|
-| 1. 進場 | ✅ 月/週線長多結構已確立 |
-| 2. 試單（MA5 過不破） | ✅ MA5 上揚、基本波動多頭 |
-| 3. 加碼（MA20 過不破） | ✅ MA20 上揚、次級波動多頭 |
-| 4. 持有 | ✅ **目前階段**，04/09 修正後 04/10 即止穩 |
-| 5. 出場（破而不過） | 尚未觸發 |
-
-### 四、明日操作策略（2026-04-13，週一）
-
-**買進條件：**
-- 明日收盤**站上 38.20**（過次箱頂 b、創新高）→ 第 1 招確立，可**順勢加碼**
-
-**賣出條件：**
-- 明日收盤**跌破 36.50**（次箱底 c）→ 阻斷信號，**出場**
-- 嚴格出場位：收盤**跌破 30.75** → 上漲波動完全阻斷
-
-**觀望條件：**
-- 收盤在 **36.50 ~ 38.20** 區間 → 次箱修正中，持有不動
-- **明日預設：觀望，持有不加不減**
-
-### 五、分析依據
-
-1. **三時框同步多頭**：月/週/日線 b/c 墊高、短中均上揚
-2. **回檔箱不重疊**（第 10 招）：36.50 遠高於前箱底 30.75，不宜因短期修正而出場
-3. **60 分線短期盤整**：MA5 翻下，屬日內修正整理，不影響日線以上的多頭判斷
-4. **風險點**：日線次箱窄（38.20~36.50 僅 1.70 元），若跌破 36.50 需觀察能否在 30.75 上方止穩
-"""
-}
-
-reports["6509"] = {
-    "name": "6509 聚和國際",
-    "date": "2026-04-12",
-    "md": """
-## 股票：6509（聚和國際 Taiwan Hopax Chemicals）
-**分析日期：2026-04-12**
-
-### 一、四時框趨勢總覽
-
-| 時框 | 最新 | 收盤 | 趨勢 | 短均 | 中均 | 長均 | 次箱頂(b) | 次箱底(c) |
-|---|---|---|---|---|---|---|---|---|
-| **月** | 2026-04 | 47.25 | **上漲** | 43.67↑ | 35.70↓ | 36.77 | 34.80 | 32.45 |
-| **週** | 04-06 | 47.25 | **上漲** | 45.36↑ | 39.60↑ | 34.31 | 45.60 | 44.65 |
-| **日** | 04-10 | 47.25 | 盤整（b/c不同步） | 44.84↑ | 44.29↑ | 38.81 | 44.90 | 44.40 |
-| **60分** | 04/10 13:00 | 47.25 | **上漲** | 46.45↑ | 44.48↓ | 44.26 | 46.55 | 46.20 |
-
-### 二、次箱結構（日線主判）
-
-- **當前上漲次箱**：頂 **44.90**（04/08 b）／底 **44.40**（04/09 c）
-- 04/10 收 47.25 **突破所有日線次箱**！過了前高 46.30、也過了 46.05
-- 止漲缺口 46.05→44.90（1.15 元）已被 47.25 完全收復
-- **月線突破 MA48 長均 36.77**，長期壓力線被突破
-
-### 三、SOP 五步狀態
-
-| 步驟 | 狀態 |
-|---|---|
-| 1. 進場 | ✅ 週線多頭確立、月線突破長均 |
-| 2. 試單（MA5 過不破） | ✅ MA5 上揚 |
-| 3. 加碼（MA20 過不破） | ✅ MA20 上揚 |
-| 4. 持有 | ✅ 修正未阻斷、**04/10 突破盤整箱** |
-| 5. 出場 | 尚未觸發 |
-
-### 四、明日操作策略（2026-04-13，週一）
-
-**買進條件：**
-- 明日收盤**站穩 46.30 以上**（不回破前高）→ 確認「過頂不破頂」（第 9 招），**可順勢買進**
-- 收盤**續創新高 > 47.25** → 更強進場訊號
-
-**賣出條件：**
-- 明日收盤**跌破 44.40**（次箱底 c）→ 假突破，第 16 招觸發，**出場**
-- 嚴格出場位：收盤**跌破 43.00** → 日線上漲波動被阻斷
-
-**觀望條件：**
-- 收盤在 **44.40 ~ 46.30** → 突破後回測，觀察能否收復
-- 收盤在 **46.30 ~ 47.25** → 突破後窄幅整理，持有不動
-
-### 五、分析依據
-
-1. **月線突破長均 36.77**：大級數趨勢由中性轉多
-2. **週線回檔箱不重疊**（第 10 招）：c 持續墊高，多頭強勢
-3. **日線 04/10 突破盤整箱創新高**：第 9 招「過頂不破頂」的前兆已現
-4. **風險點**：需確認突破不是假過——若跌破 44.40 則第 16 招觸發
-"""
-}
-
-reports["7709"] = {
-    "name": "7709 榮田精機",
-    "date": "2026-04-12",
-    "md": """
-## 股票：7709（榮田精機 Honor）
-**分析日期：2026-04-12**
-**注意：此股無 60 分線資料，僅分析月/週/日三時框。上櫃時間短（2024 年），月線 MA48 無法計算。**
-
-### 一、三時框趨勢總覽
-
-| 時框 | 最新 | 收盤 | 趨勢 | 短均 | 中均 | 長均 | 次箱頂(b) | 次箱底(c) |
-|---|---|---|---|---|---|---|---|---|
-| **月** | 2026-04 | 72.60 | **上漲** | 70.63↑ | 48.66↑ | - | 77.40 | (尚未出現) |
-| **週** | 04-06 | 72.60 | **上漲** | 65.65↑ | 59.04↑ | 43.93 | 70.60 | 51.80 |
-| **日** | 04-10 | 72.60 | 盤整（b/c不同步） | 71.26↑ | 63.31↑ | 55.57 | 74.10 | 67.40 |
-
-### 二、次箱結構（日線主判）
-
-- **當前上漲次箱**：頂 **74.10**（04/08 b）／底 **67.40**（04/07 c）
-- **前一高點**：77.40（03/31），04/08 的 74.10 未能過前高 → **止漲缺口 3.30 元**
-- **止漲缺口宜賣出（第 4 招）已出現**
-- 但 04/10 收 72.60 仍高於次箱底 67.40，阻斷尚未發生
-
-### 三、SOP 五步狀態
-
-| 步驟 | 狀態 |
-|---|---|
-| 1. 進場 | ✅ 週/月線長多確立 |
-| 2. 試單（MA5 過不破） | ✅ MA5 上揚 71.26 |
-| 3. 加碼（MA20 過不破） | ✅ MA20 上揚 63.31 |
-| 4. 持有 | ⚠️ 目前階段，但出現日線止漲缺口需注意 |
-| 5. 出場 | 尚未觸發 |
-
-### 四、明日操作策略（2026-04-13，週一）
-
-**買進條件：**
-- 明日收盤**站上 74.10**（過次箱頂 b）→ 收復止漲缺口的第一步，轉強訊號
-- 若能**直接過 77.40**（前高）→ 止漲缺口完全收復，**最強買進訊號**
-
-**賣出條件：**
-- 明日收盤**跌破 67.40**（次箱底 c）→ 配合 3.30 元止漲缺口，**第 4 招確認，出場**
-- 嚴格出場位：收盤**跌破 54.00**（前一更大次箱底）
-
-**觀望條件：**
-- 收盤在 **67.40 ~ 74.10** 區間 → 次箱內整理
-- **明日預設：觀望。持有不加碼，但阻斷未發生不急出場**
-
-### 五、分析依據
-
-1. **日線止漲缺口 3.30 元已形成**（77.40→74.10）：第 4 招警訊存在
-2. **週/月線仍為強勢多頭**：週線收盤 72.60 已過前箱頂 70.60、回檔箱不重疊
-3. **關鍵訊號位**：74.10（過→轉強）、77.40（過→缺口消除）、67.40（破→阻斷出場）
-4. **風險提醒**：此股波動極大，止漲缺口若無法被收復，可能形成第 15 招頭部結構
-"""
-}
-
-# 產出各股 HTML
-cards_html = ""
-for code in ["2367", "6405", "6509", "7709"]:
-    r = reports[code]
-    html_content = markdown.markdown(r["md"], extensions=["tables"])
-    fname = f"{code}_analysis.html"
-    with open(os.path.join(REPORTS_DIR, fname), "w", encoding="utf-8") as f:
-        f.write(HTML_TEMPLATE.format(title=r["name"] + " 分析報告", content=html_content))
-    print(f"已產出: {fname}")
-    cards_html += f"""
-<div class="card">
-  <a href="{fname}">{r['name']}</a>
-  <div class="date">分析日期：{r['date']}</div>
-</div>
-"""
-
-# 產出首頁
 with open(os.path.join(REPORTS_DIR, "index.html"), "w", encoding="utf-8") as f:
-    f.write(INDEX_TEMPLATE.format(cards=cards_html))
+    f.write(INDEX_TEMPLATE.format(sections=sections_html))
+
+print(f"已掃描 {sum(len(v) for v in by_date.values())} 份報告，{len(by_date)} 個日期")
 print("已產出: index.html")
