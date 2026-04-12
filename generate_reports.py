@@ -18,6 +18,7 @@ STOCK_NAMES = {
     "7709": "榮田精機",
     "MU": "美光科技",
     "NVDA": "輝達",
+    "NET": "Cloudflare",
 }
 
 INDEX_TEMPLATE = """<!DOCTYPE html>
