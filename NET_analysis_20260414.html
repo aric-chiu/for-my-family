@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NET Cloudflare 分析報告</title>
+<style>
+  body { font-family: -apple-system, "Microsoft JhengHei", "Segoe UI", sans-serif; max-width: 900px; margin: 0 auto; padding: 20px; background: #f8f9fa; color: #333; line-height: 1.6; }
+  h1 { color: #1a73e8; border-bottom: 2px solid #1a73e8; padding-bottom: 8px; }
+  h2 { color: #333; margin-top: 28px; }
+  h3 { color: #555; }
+  table { border-collapse: collapse; width: 100%; margin: 12px 0; font-size: 14px; }
+  th, td { border: 1px solid #ddd; padding: 8px 12px; text-align: left; }
+  th { background: #1a73e8; color: white; }
+  tr:nth-child(even) { background: #f2f2f2; }
+  .nav { margin-bottom: 20px; }
+  .nav a { color: #1a73e8; text-decoration: none; }
+  .nav a:hover { text-decoration: underline; }
+  .footer { margin-top: 40px; padding-top: 16px; border-top: 1px solid #ddd; color: #888; font-size: 12px; }
+</style>
+</head>
+<body>
+<div class="nav"><a href="index.html">← 首頁</a></div>
+
+<h2>股票：NET（Cloudflare, Inc.）</h2>
+<p><strong>分析日期：2026-04-14（週二收盤為基準）</strong></p>
+<h3>一、四時框趨勢總覽</h3>
+<table>
+<tr><th>時框</th><th>最新</th><th>收盤</th><th>趨勢</th><th>短均</th><th>中均</th><th>長均</th><th>次箱頂(b)</th><th>次箱底(c)</th></tr>
+<tr><td><strong>月</strong></td><td>2026-04</td><td>178.65</td><td>盤整（b/c不同步）</td><td>185.73↑</td><td>198.16↑</td><td>106.91</td><td>206.34</td><td>172.19</td></tr>
+<tr><td><strong>週</strong></td><td>04-13</td><td>178.65</td><td>盤整（b/c不同步）</td><td>190.09↓</td><td>188.66↓</td><td>192.29</td><td>211.69</td><td>203.02</td></tr>
+<tr><td><strong>日</strong></td><td>04-14</td><td>178.65</td><td>下跌（b/c同步壓低）</td><td>186.79↓</td><td>205.94↑</td><td>191.66</td><td>184.02</td><td>166.99</td></tr>
+<tr><td><strong>60分</strong></td><td>04/14 15:30</td><td>178.65</td><td>上漲（b/c同步墊高）</td><td>179.27↓</td><td>178.79↓</td><td>200.63</td><td>185.23</td><td>178.35</td></tr>
+</table>
+<p><strong>反彈受挫再回 -2.92%</strong>：4/14 收 178.65，較 4/13（184.02）回檔 -2.92%。日線從 4/10 低 166.99 反彈到 4/13 的 184.02（+10.2%）後，今日再度被壓回，<strong>但尚未收破 4/10 的 c=166.99</strong>，仍在新次箱內。週/日線阻斷未解除（週前 c 203.02、日前 b 216.29 均未收復），60 分線出現止跌缺口 11.35 元（166.99→178.35），短線轉強。整體仍屬下跌波段中的反彈結構。</p>
+<h3>二、次箱結構（日線主判）</h3>
+<ul>
+<li><strong>目前次箱（上漲中）</strong>：頂 <strong>184.02</strong>（04/13 b）／底 <strong>166.99</strong>（04/10 c）</li>
+<li><strong>4/14 收 178.65 > 前 c 166.99</strong> → 日線反彈結構未阻斷，仍在有效次箱內</li>
+<li><strong>前一下跌次箱</strong>：頂 216.29（04/07 b）／底 166.99（04/10 c）— 大幅下跌次箱</li>
+<li><strong>日線止漲缺口</strong>：216.29（04/07 b）→ 184.02（04/13 b）— <strong>32.27 元</strong>，上方為巨大壓力</li>
+<li><strong>日線止跌缺口</strong>：207.33（03/16 c）→ 213.15（03/24 c）— 5.82 元（舊結構，已失效）</li>
+<li><strong>週線結構</strong>：頂 211.69（03/30）／底 166.99（04/06），收 178.65 位於箱中偏低</li>
+<li><strong>月線結構</strong>：04 月 178.65，前 b 206.34（03 月）、前 c 172.19（02 月），<strong>4/14 距月前 c 僅 6.46 元（+3.76%），月線防線貼近</strong></li>
+</ul>
+<h3>三、SOP 五步狀態</h3>
+<table>
+<tr><th>步驟</th><th>狀態</th></tr>
+<tr><td>1. 進場</td><td>❌ 日/週阻斷未解除，不具新進場條件</td></tr>
+<tr><td>2. 試單（MA5 過不破）</td><td>❌ 日線 MA5（186.79↓）仍在上方</td></tr>
+<tr><td>3. 加碼（MA20 過不破）</td><td>❌ 日線 MA20（205.94）遠在上方</td></tr>
+<tr><td>4. 持有</td><td>⚠️ 日線反彈中，原部位可勉強續抱</td></tr>
+<tr><td>5. 出場</td><td>✅ 日/週阻斷持續，出場訊號未解</td></tr>
+</table>
+<h3>四、明日操作策略（2026-04-15，週三）</h3>
+<p><strong>買進條件：</strong></p>
+<ul>
+<li><strong>反彈不追</strong>：日/週阻斷尚未解除，日線 MA5/MA20 雙雙下行壓境</li>
+<li>若明日<strong>收盤站上 186.79</strong>（日線 MA5）→ 短線重回多頭，可觀察</li>
+<li>若能<strong>過 216.29</strong>（日線前 b）→ 日線阻斷被收復，可<strong>輕倉試單</strong></li>
+<li><strong>目前不具備新進場條件</strong></li>
+</ul>
+<p><strong>賣出條件：</strong></p>
+<ul>
+<li>若明日<strong>收破 172.19</strong>（月線前 c）→ 月線阻斷，第 5 招「破底不過頂」完全成立，<strong>全面退場</strong></li>
+<li>若破 <strong>166.99</strong>（日/週前 c）→ 反彈完全失敗，續跌訊號</li>
+<li>最終防線：月線前 c <strong>172.19</strong></li>
+</ul>
+<p><strong>觀望條件：</strong></p>
+<ul>
+<li>收盤在 <strong>166.99 ~ 186.79</strong> 區間 → 反彈帶高檔震盪</li>
+<li>60 分線 MA5（179.27↓）、MA25（178.79↓）雙雙下行，但已見止跌缺口 11.35</li>
+<li><strong>明日預設：空手觀望，持有者趁反彈減碼。月前 c 172.19 為最後防線，破則按第 5 招空頭處理</strong></li>
+</ul>
+<h3>五、分析依據</h3>
+<ol>
+<li><strong>日線反彈受挫</strong>：4/13 衝高至 184.02 後 4/14 回落至 178.65，日線 MA5 186.79↓ 壓境，MA5 下彎為短線轉弱訊號</li>
+<li><strong>日/週線阻斷未解</strong>：日前 b 216.29、週前 c 203.02 均未收復，阻斷事實延續</li>
+<li><strong>月線前 c 172.19 為最後防線</strong>：4/14 收 178.65 距月前 c 僅 6.46 元（+3.76%），極度貼近，若 4/15 再跌 3.6% 即破防</li>
+<li><strong>60 分線止跌缺口 11.35 元</strong>：166.99→178.35 的墊高為反彈持續訊號，但 MA5/MA25 仍下行，反彈結構尚未鞏固</li>
+<li><strong>風險提醒</strong>：月線止漲缺口 253.30→206.34（46.96 元）為超大壓力帶，上方壓力極大；第 12 招「乘離雖大不准接」仍適用，不宜搶短追高。若月前 c 172.19 失守，則 4 月形成月線首次阻斷，大格局將進入第 5 招空頭處理</li>
+</ol>
+
+<div class="footer">箱波均控盤戰法分析報告 · 由 Claude Code 自動產出</div>
+</body>
+</html>
