@@ -21,6 +21,7 @@ STOCK_NAMES = {
     "MU": "美光科技",
     "NVDA": "輝達",
     "NET": "Cloudflare",
+    "NHPAP": "National Healthcare Properties",
 }
 
 INDEX_TEMPLATE = """<!DOCTYPE html>
