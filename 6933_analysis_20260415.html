@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>6933 艾瑪斯科技 分析報告</title>
+<style>
+  body { font-family: -apple-system, "Microsoft JhengHei", "Segoe UI", sans-serif; max-width: 900px; margin: 0 auto; padding: 20px; background: #f8f9fa; color: #333; line-height: 1.6; }
+  h1 { color: #1a73e8; border-bottom: 2px solid #1a73e8; padding-bottom: 8px; }
+  h2 { color: #333; margin-top: 28px; }
+  h3 { color: #555; }
+  table { border-collapse: collapse; width: 100%; margin: 12px 0; font-size: 14px; }
+  th, td { border: 1px solid #ddd; padding: 8px 12px; text-align: left; }
+  th { background: #1a73e8; color: white; }
+  tr:nth-child(even) { background: #f2f2f2; }
+  .nav { margin-bottom: 20px; }
+  .nav a { color: #1a73e8; text-decoration: none; }
+  .nav a:hover { text-decoration: underline; }
+  .footer { margin-top: 40px; padding-top: 16px; border-top: 1px solid #ddd; color: #888; font-size: 12px; }
+</style>
+</head>
+<body>
+<div class="nav"><a href="index.html">← 首頁</a></div>
+
+<h2>股票：6933（艾瑪斯科技）</h2>
+<p><strong>分析日期：2026-04-15（週三收盤為基準）</strong></p>
+<h3>一、三時框趨勢總覽（60 分線資料不足）</h3>
+<table>
+<tr><th>時框</th><th>最新</th><th>收盤</th><th>趨勢</th><th>短均</th><th>中均</th><th>長均</th><th>次箱頂(b)</th><th>次箱底(c)</th></tr>
+<tr><td><strong>月</strong></td><td>2026-04</td><td>186.00</td><td>下跌（b/c同步壓低）</td><td>151.00↓</td><td>163.91↓</td><td>N/A</td><td>144.50</td><td>122.50</td></tr>
+<tr><td><strong>週</strong></td><td>04-13</td><td>186.00</td><td>下跌（b/c同步壓低）</td><td>159.38↓</td><td>142.42↓</td><td>161.46</td><td>133.00</td><td>129.00</td></tr>
+<tr><td><strong>日</strong></td><td>04-15</td><td>186.00</td><td>上漲（b/c同步墊高）</td><td>181.00↑</td><td>144.68↑</td><td>141.03</td><td>195.50</td><td>183.50</td></tr>
+</table>
+<p><strong>急漲後首次回檔、日線未阻斷</strong>：4/15 收 186.00，較 4/14（183.50）反彈 +1.36%。日線次箱 b=195.50（04/13）／c_prior=122.50（03/31），4/14 L=183.50 > 122.50 <strong>未阻斷</strong>，日線次箱結構保持完整。<strong>週線/月線因前期急跌尚未扭轉、b/c 結構仍偏空</strong>，但日線短期急漲段主導目前價格走勢。從 03/31 低 122.50 急漲至 04/13 高 195.50（+60.0%）後 04/14 回檔至 183.50（-6.1%），4/15 反彈 +1.36%，屬急漲後正常回檔。</p>
+<h3>二、次箱結構（日線主判）</h3>
+<ul>
+<li><strong>目前次箱</strong>：頂 <strong>195.50</strong>（04/13 b）／底 <strong>122.50</strong>（03/31 c，此前唯一顯著 L）</li>
+<li><strong>4/15 收 186.00 > 前 c 122.50</strong> → 日線結構未阻斷，但因 c_prior 為遠低點，次箱高度極大（73 元，37%），屬過度拉伸</li>
+<li><strong>日線止漲缺口</strong>：142.00（03/11 b）→ 134.00（03/27 b）— <strong>8.00 元</strong> —為舊缺口，已被 04/13 b=195.50 完全突破</li>
+<li><strong>日線止跌缺口</strong>：122.50（03/31 c）→ 183.50（04/14 c）— <strong>61.00 元</strong>（49.8%）— 極端墊高，反映急漲段買盤強勢</li>
+<li><strong>週線結構</strong>：頂 133.00（03/09 b）／底 129.00（03/16 c），4/15 收 186.00 早已遠超週前 b 133.00，但因週 K 尚未更新至 4/13 當週數據為新高，週線趨勢判定仍為下跌</li>
+<li><strong>月線結構</strong>：頂 144.50（02 月 b）／底 122.50（03 月 c），<strong>4 月收 186.00 > 月前 b 144.50</strong> → 月線 4 月已突破，但月 K 結構計算上仍顯示下跌（因前期顯著 turns 為下跌方向）</li>
+<li><strong>60 分線資料缺失</strong>：yfinance 對新股的 60 分資料範圍限制（730 日內），暫無法分析</li>
+</ul>
+<h3>三、SOP 五步狀態</h3>
+<table>
+<tr><th>步驟</th><th>狀態</th></tr>
+<tr><td>1. 進場</td><td>⚠️ 週/月前高已被實質突破但結構仍偏空，條件不完整</td></tr>
+<tr><td>2. 試單（MA5 過不破）</td><td>✅ 日線 MA5（181.00↑），收 186 > MA5</td></tr>
+<tr><td>3. 加碼（MA20 過不破）</td><td>✅ 日線 MA20（144.68↑），價格遠高</td></tr>
+<tr><td>4. 持有</td><td>⚠️ 原部位持有，但急漲乖離極大，不宜加碼</td></tr>
+<tr><td>5. 出場</td><td>❌ 尚無阻斷訊號，但警戒升高</td></tr>
+</table>
+<h3>四、明日操作策略（2026-04-16，週四）</h3>
+<p><strong>買進條件：</strong></p>
+<ul>
+<li><strong>不建議新單進場</strong>：急漲 +60% 於 9 日，第 12 招「乘離不准接」（日線 MA5=181 vs 收 186，乖離 +2.8% 尚可；但 vs MA20=144.68，乖離 <strong>+28.5%</strong> 極大）</li>
+<li>僅在<strong>大幅回檔至 181（日線 MA5）且止穩</strong> → 可試單</li>
+<li>若回檔至 <strong>170~175 區間</strong>（急漲段的 50% 位置附近）且出現長下影線 → 可加碼</li>
+<li>收過 <strong>195.50（日線前 b）</strong> → 日線創新高，但因乖離過大不建議追價</li>
+</ul>
+<p><strong>賣出條件：</strong></p>
+<ul>
+<li>若明日<strong>收破 183.50</strong>（日線前 c） → 急漲結構受損，<strong>減碼一半</strong>（非 1/3，因乘離極大）</li>
+<li>若續破 <strong>181（日線 MA5）</strong> → MA5 失守，<strong>再減碼 1/3</strong></li>
+<li>若破 <strong>144.68（日線 MA20）</strong> → 大幅墊高失敗，<strong>剩餘部位全數出場</strong></li>
+<li>最終防線：日線 MA60 <strong>141.03</strong></li>
+</ul>
+<p><strong>觀望條件：</strong></p>
+<ul>
+<li>收盤在 <strong>183.50 ~ 195.50</strong> 區間 → 急漲後區間整理，等待乖離收斂</li>
+<li><strong>明日預設：持有觀察，不加碼。急漲幅度過大，乖離過大，任何反彈不過 195.50 且連 2 日收黑需減碼</strong></li>
+</ul>
+<h3>五、分析依據</h3>
+<ol>
+<li><strong>日線止跌缺口 61.00 元（49.8%）</strong>：從 122.50（03/31）一口氣墊高至 183.50（04/14），墊高幅度居 6 檔之冠，反映單向買盤強勢但極度偏離</li>
+<li><strong>日線乖離極大</strong>：收 186 vs MA20=144.68 為 <strong>+28.5%</strong>，遠超第 12 招「乘離不准接」的安全範圍（通常 MA20 乖離 > 10% 即警戒）</li>
+<li><strong>月線 MA3（151.00↓）下行</strong>：雖 4 月收 186 > 月前 b 144.50，但月線中短均同步下行（MA3 151.00↓、MA12 163.91↓），<strong>月線結構尚未轉為多頭</strong></li>
+<li><strong>週線結構仍為下跌</strong>：因前一波 b=133.00 → c=129.00 → 急漲至 195.50 未反映於本次 filter_box 顯著結構中，週線仍判為下跌；但實質上已大幅突破</li>
+<li><strong>風險提醒</strong>：<strong>新股、60 分線資料不足無法確認短線結構</strong>；急漲段 +60% 於 9 日為全場最大漲幅，屬典型籌碼不穩的快速拉升；前高 195.50 未過即回檔，若連 2 日收破 183.50，第 10 招「連續頭部不過新高」成立，應大幅減碼</li>
+</ol>
+<div class="footer">箱波均控盤戰法分析報告 · 由 Claude Code 自動產出</div>
+</body>
+</html>

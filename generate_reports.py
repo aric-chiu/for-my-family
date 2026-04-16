@@ -22,6 +22,7 @@ STOCK_NAMES = {
     "NVDA": "輝達",
     "NET": "Cloudflare",
     "NHPAP": "National Healthcare Properties",
+    "TSLA": "Tesla",
 }
 
 INDEX_TEMPLATE = """<!DOCTYPE html>
