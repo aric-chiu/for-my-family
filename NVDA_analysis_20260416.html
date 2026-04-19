@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NVDA 輝達 分析報告</title>
+<style>
+  body { font-family: -apple-system, "Microsoft JhengHei", "Segoe UI", sans-serif; max-width: 960px; margin: 0 auto; padding: 20px; background: #f8f9fa; color: #333; line-height: 1.7; }
+  h1 { color: #1a73e8; border-bottom: 2px solid #1a73e8; padding-bottom: 8px; }
+  h2 { color: #444; margin-top: 32px; border-left: 4px solid #1a73e8; padding-left: 12px; }
+  h3 { color: #555; margin-top: 24px; }
+  table { border-collapse: collapse; width: 100%; margin: 12px 0; background: white; }
+  th, td { border: 1px solid #ddd; padding: 8px 12px; text-align: left; font-size: 14px; }
+  th { background: #1a73e8; color: white; }
+  tr:nth-child(even) { background: #f4f6f8; }
+  code { background: #f0f3f6; padding: 2px 6px; border-radius: 3px; font-family: Consolas, monospace; }
+  strong { color: #d32f2f; }
+  ul, ol { padding-left: 24px; }
+  li { margin: 4px 0; }
+  .nav { margin-bottom: 20px; }
+  .nav a { color: #1a73e8; text-decoration: none; }
+  .footer { margin-top: 40px; padding-top: 16px; border-top: 1px solid #ddd; color: #888; font-size: 12px; }
+</style>
+</head>
+<body>
+<div class="nav"><a href="index.html">← 首頁</a></div>
+<h2>股票：NVDA（NVIDIA Corporation）</h2>
+<p><strong>分析日期：2026-04-16（週四收盤為基準）</strong></p>
+<h3>一、四時框趨勢總覽</h3>
+<table>
+<tr><th>時框</th><th>最新</th><th>收盤</th><th>趨勢</th><th>短均</th><th>中均</th><th>長均</th><th>次箱頂(b)</th><th>次箱底(c)</th></tr>
+<tr><td><strong>月</strong></td><td>2026-04</td><td>201.68</td><td>盤整（b/c不同步）</td><td>184.42↑</td><td>178.49↑</td><td>93.66</td><td>191.12</td><td>176.98</td></tr>
+<tr><td><strong>週</strong></td><td>04-13</td><td>201.68</td><td>下跌（顯著結構遲滯，實質已突破）</td><td>183.81↑</td><td>183.07↓</td><td>171.79</td><td>189.81</td><td>182.80</td></tr>
+<tr><td><strong>日</strong></td><td>04-16</td><td>198.35</td><td>下跌（顯著結構遲滯，實質急漲反轉）</td><td>194.33↑</td><td>180.28↓</td><td>183.48</td><td>178.68</td><td>172.70</td></tr>
+<tr><td><strong>60分</strong></td><td>04/16 15:30</td><td>198.24</td><td>上漲（b/c同步墊高）</td><td>198.18↑</td><td>195.75↑</td><td>181.60</td><td>194.80</td><td>188.02</td></tr>
+</table>
+<p><strong>顯著結構遲滯、實質急漲反轉</strong>：4/16 收 198.35，較 4/15（198.87）微跌 -0.26%，但 4/15 盤中 H=198.87、4/16 盤中 H=199.01，<strong>已遠超日線顯著前 b 178.68（+11.4%）</strong>。顯著次箱雖因 3/30 L=165.17 阻斷前 b 178.68 而結構顯示「下跌」，實質則 4/10 起急漲 +20%（165.17→198.87），月前 b=191.12 亦已於 4/14 突破，<strong>結構正轉多頭中</strong>。60 分線三均線（MA5 198.18↑、MA25 195.75↑、MA100 181.60）完整多頭排列。</p>
+<h3>二、次箱結構（日線主判）</h3>
+<ul>
+<li><strong>目前次箱（顯著，阻斷後）</strong>：頂 <strong>178.68</strong>（03/25 b）／底 <strong>165.17</strong>（03/30 L，阻斷前 c 172.70）</li>
+<li><strong>4/16 收 198.35 > 前 b 178.68</strong> → <strong>已於 04/14 首度收過</strong>，日線第 16 招「假跌破」成立</li>
+<li><strong>前一次箱</strong>：頂 183.22（03/16 b）／底 172.70（03/20 c）— 已被 03/30 L=165.17 阻斷</li>
+<li><strong>日線止漲缺口</strong>：183.22（03/16 b）→ 178.68（03/25 b）— <strong>4.54 元</strong>（2.5%）— 收 198.35 已完全收復</li>
+<li><strong>週線結構</strong>：顯著 b=189.81（02/16）/ c=182.80（02/09），收 201.68 > 189.81 → 週線實質已突破（但 3/23 L=167.52 阻斷後再創高，結構重整中）</li>
+<li><strong>月線結構</strong>：頂 191.12（2026-01 b）／底 176.98（2025-11 c），<strong>4 月暫收 201.68 > 191.12 → 月線突破，第 1 招成立</strong></li>
+<li><strong>月線止漲缺口</strong>：202.47（2025-10 b）→ 191.12（2026-01 b）— 11.35 元（5.6%），收 201.68 已幾乎完全收復</li>
+<li><strong>60 分線</strong>：b=194.80（04/14 11:30）/ c_prior=188.02（04/13 13:30），收 198.24 續在 b 上方，結構完整</li>
+</ul>
+<h3>三、SOP 五步狀態</h3>
+<table>
+<tr><th>步驟</th><th>狀態</th></tr>
+<tr><td>1. 進場</td><td>✅ 月線突破 191.12，60 分線三均線多頭</td></tr>
+<tr><td>2. 試單（MA5 過不破）</td><td>✅ 日線 MA5（194.33↑）已過</td></tr>
+<tr><td>3. 加碼（MA20 過不破）</td><td>✅ 日線 MA20（180.28↓）遠低於收盤，價格遠高</td></tr>
+<tr><td>4. 持有</td><td>✅ 反轉結構啟動，原部位續抱</td></tr>
+<tr><td>5. 出場</td><td>❌ 尚無出場訊號</td></tr>
+</table>
+<h3>四、明日操作策略（2026-04-17，週五）</h3>
+<p><strong>買進條件：</strong></p>
+<ul>
+<li><strong>急漲 +20%（165.17→198.87，12 日）</strong>，乖離 vs MA20（180.28）為 +10.0%，不宜 198 追高</li>
+<li>若拉回<strong>測試 194.33（日線 MA5）止穩</strong> → 短線健康整理，可試單</li>
+<li>若拉回至 <strong>191.12（月前 b 變支撐）</strong> → 第 3 招完整成立，<strong>加碼良機</strong></li>
+<li>若拉回至 <strong>188.02（60 分線前 c）止穩</strong> → 60 分線結構未破，可加碼</li>
+<li>若收過 <strong>202.47（月線止漲缺口上緣）</strong> → 月線崩跌缺口完全收復，強力訊號</li>
+</ul>
+<p><strong>賣出條件：</strong></p>
+<ul>
+<li>若明日<strong>收破 194.33（日線 MA5）</strong> → 短線轉弱，<strong>減碼 1/3</strong></li>
+<li>若續破 <strong>188.02（60 分線前 c）</strong> → 60 分線阻斷，<strong>減碼一半</strong></li>
+<li>若破 <strong>180.28（日線 MA20）</strong> → 日線結構反轉，<strong>剩餘部位出場</strong></li>
+<li>最終防線：日線前 b 178.68（與 MA60 183.48 之間為二級支撐）</li>
+</ul>
+<p><strong>觀望條件：</strong></p>
+<ul>
+<li>收盤在 <strong>194 ~ 202</strong> 區間 → 急漲後整理</li>
+<li><strong>明日預設：持有續抱。月線突破為主軸，日線顯著結構雖遲滯但實質已反轉，拉回至 MA5 或月前 b 即為加碼良機</strong></li>
+</ul>
+<h3>五、分析依據</h3>
+<ol>
+<li><strong>月線第 1 招成立</strong>：4 月暫收 201.68 > 月前 b 191.12，且月線三均線（MA3 184.42↑、MA12 178.49↑、MA48 93.66）完整多頭</li>
+<li><strong>日線實質急漲反轉</strong>：雖顯著 filter_box 結構因 3/30 L=165.17 阻斷前 c 172.70 而顯示「下跌」，但 4/10 起 12 日急漲 +20%，4/14 已收過前 b 178.68，結構正在重整為上漲</li>
+<li><strong>60 分線三均線完整多頭</strong>：MA5（198.18↑）> MA25（195.75↑）> MA100（181.60），連續上行排列</li>
+<li><strong>日線止漲缺口 4.54 元已完全收復</strong>：183.22→178.68 的缺口，收 198.35 遠高於上緣，空頭結構被剷除</li>
+<li><strong>風險提醒</strong>：從 3/30 L=165.17 急漲至 4/15 H=198.87（+20.4%/12 日）屬急漲段，乖離升高；日線 MA20=180.28↓ 仍下行，中均線尚未翻揚；若明日收破 MA5 194.33 則短線需警戒；月線崩跌缺口上緣 202.47 為關鍵，收過即為月線全面多頭確認</li>
+</ol>
+<div class="footer">箱波均控盤戰法分析報告 · 由 Claude Code 自動產出</div>
+</body>
+</html>
