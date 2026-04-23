@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NET Cloudflare 分析報告</title>
+<style>
+  body { font-family: -apple-system, "Microsoft JhengHei", "Segoe UI", sans-serif; max-width: 960px; margin: 0 auto; padding: 20px; background: #f8f9fa; color: #333; line-height: 1.7; }
+  h1 { color: #1a73e8; border-bottom: 2px solid #1a73e8; padding-bottom: 8px; }
+  h2 { color: #444; margin-top: 32px; border-left: 4px solid #1a73e8; padding-left: 12px; }
+  h3 { color: #555; margin-top: 24px; }
+  table { border-collapse: collapse; width: 100%; margin: 12px 0; background: white; }
+  th, td { border: 1px solid #ddd; padding: 8px 12px; text-align: left; font-size: 14px; }
+  th { background: #1a73e8; color: white; }
+  tr:nth-child(even) { background: #f4f6f8; }
+  code { background: #f0f3f6; padding: 2px 6px; border-radius: 3px; font-family: Consolas, monospace; }
+  strong { color: #d32f2f; }
+  ul, ol { padding-left: 24px; }
+  li { margin: 4px 0; }
+  .nav { margin-bottom: 20px; }
+  .nav a { color: #1a73e8; text-decoration: none; }
+  .footer { margin-top: 40px; padding-top: 16px; border-top: 1px solid #ddd; color: #888; font-size: 12px; }
+</style>
+</head>
+<body>
+<div class="nav"><a href="index.html">← 首頁</a></div>
+<h2>股票：NET（Cloudflare, Inc.）</h2>
+<p><strong>分析日期：2026-04-22（週三收盤為基準）</strong></p>
+<h3>一、四時框趨勢總覽</h3>
+<table>
+<tr><th>時框</th><th>最新</th><th>收盤</th><th>趨勢</th><th>短均</th><th>中均</th><th>長均</th><th>次箱頂(b)</th><th>次箱底(c)</th></tr>
+<tr><td><strong>月</strong></td><td>2026-04</td><td>207.56</td><td>反彈（MA3 仍下壓、MA12 上）</td><td>195.36↓</td><td>200.57↑</td><td>107.52↑</td><td>260.00</td><td>89.42</td></tr>
+<tr><td><strong>週</strong></td><td>04-20</td><td>207.56</td><td>反彈（c 連 2 壓低後彈）</td><td>196.81↑</td><td>193.00↓</td><td>194.39↓</td><td>229.15</td><td>158.83</td></tr>
+<tr><td><strong>日</strong></td><td>04-22</td><td>207.56</td><td><strong>翻多（MA5/20/60 三均翻上）</strong></td><td>203.68↑</td><td>200.99↑</td><td>194.01↑</td><td>225.13</td><td>164.05</td></tr>
+<tr><td><strong>60分</strong></td><td>04/22 15:30</td><td>207.60</td><td>高檔震盪（b 略壓低）</td><td>207.27↑</td><td>205.22↑</td><td>197.97↑</td><td>211.95</td><td>206.01</td></tr>
+</table>
+<p><strong>日線 MA 全部翻上為關鍵轉折、但 60 分 b 壓低警訊</strong>：04/22 收 207.56（平盤 -0.05%），盤中高 211.95 為 60 分新 b，但未能延續，收盤回落。<strong>日線 MA5（203.68↑）、MA20（200.99↑）、MA60（194.01↑）三均全部翻上</strong>為重大轉折（前一日 MA20/MA60 仍下壓），確認日線由反彈進入初步翻多。但 60 分 MA5 已接近 MA25（207.27 vs 205.22，收盤 207.60 已貼近 MA5），短線衝高回落；週 MA13（193.00↓）/MA52（194.39↓）仍下壓，中期結構未完全翻多。</p>
+<h3>二、次箱結構（日線主判）</h3>
+<ul>
+<li><strong>目前次箱</strong>：頂 <strong>225.13</strong>（04/08 b）／底 <strong>164.05</strong>（04/10 c）— 箱高 <strong>37.2%</strong>（高波動）</li>
+<li><strong>4/22 收 207.56</strong>：位於次箱中上緣（距頂 -7.8%，距底 +26.5%）</li>
+<li><strong>前一次箱</strong>：頂 229.15（03/18 b 本波高）／底 191.29（03/30 c），現 b=225.13 已壓低 -1.8%</li>
+<li><strong>日線 b 連 2 壓低</strong>：229.15（03/18）→ 225.13（04/08，-1.8%）— 須突破 225 才解除</li>
+<li><strong>日線 c 急破後反彈</strong>：191.29（03/30）→ 164.05（04/10，急破 -14.2%）→ 4/22 高 211.95 未新 c 墊高（須等新 c > 164 才確認）</li>
+<li><strong>週線結構</strong>：頂 229.15（03/16 b）／底 158.83（02/23 c）；週 b 連 4 壓低（260.00→215.30→218.22→229.15）</li>
+<li><strong>月線結構</strong>：頂 260.00（2025-11 歷史高）／底 89.42（2025-04 c）；月 MA3 195.36↓ 仍下壓、MA12 200.57↑ 翻上；本月從 164.05 彈至 211.95，已修復 -63%（本月振幅 +29%）</li>
+<li><strong>60 分線</strong>：b 由 211.39（04/21）→ <strong>211.95（04/22）</strong>+0.3% 墊高僅微幅，短線動能減弱；c 由 195.20→206.01 連 5 墊高，60 分結構仍多但節奏放緩</li>
+</ul>
+<h3>三、SOP 五步狀態</h3>
+<table>
+<tr><th>步驟</th><th>狀態</th></tr>
+<tr><td>1. 進場</td><td>✅ <strong>日線第 1 招成立</strong>（MA5/20/60 三均翻上），可試單</td></tr>
+<tr><td>2. 試單</td><td>✅ MA5（203.68↑）已過且未破</td></tr>
+<tr><td>3. 加碼</td><td>⏳ MA20（200.99↑）翻上但距 MA60 尚淺，等突破 225.13 確認才加碼</td></tr>
+<tr><td>4. 持有</td><td>✅ 持有者續抱，停利參考次箱頂 225.13</td></tr>
+<tr><td>5. 出場</td><td>⏳ 未觸發；跌破 203.68（MA5）減碼、破 194.01（MA60）再減、破 164.05 全出</td></tr>
+</table>
+<h3>四、明日操作策略（2026-04-23，週四）</h3>
+<p><strong>買進條件：</strong></p>
+<ul>
+<li>持有者續抱；<strong>突破 211.95（60 分 b）並站穩</strong> 可短線試單</li>
+<li>若突破 <strong>225.13（次箱頂）</strong> → 日線第 1 招完全確認，中線加碼</li>
+<li>回測 <strong>203.68（日線 MA5）</strong> 或 <strong>206.01（60 分 c）</strong> 不破可加碼</li>
+</ul>
+<p><strong>賣出條件：</strong></p>
+<ul>
+<li>若續破 <strong>200.99（日線 MA20）</strong> → 中均失守，減碼 1/3</li>
+<li>若續破 <strong>194.01（日線 MA60）</strong> → 長均失守，再減碼 1/3</li>
+<li>若續破 <strong>164.05（日線前 c）</strong> → 次箱破，全數出場</li>
+</ul>
+<p><strong>觀望條件：</strong></p>
+<ul>
+<li>收盤在 <strong>203.68 ~ 211.95</strong> 區間 → 日線 MA5 / 60 分 b 震盪觀察</li>
+<li><strong>明日預設：偏多試單。日線 MA5/20/60 三均翻上為關鍵多頭轉折（前一日 MA20/60 仍下壓），但 04-22 上影線顯示 211.95 處壓力仍存；突破 225.13 才確認中線翻多，否則 211~225 區間震盪；建議突破 211.95 短線進、破 200.99 停損</strong></li>
+</ul>
+<h3>五、分析依據</h3>
+<ol>
+<li><strong>日線 MA5/20/60 三均翻上</strong>：MA5 203.68↑、MA20 200.99↑、MA60 194.01↑，多頭排列成形，為自 3/18 以來首次三均同向上揚</li>
+<li><strong>週線 MA 仍分歧</strong>：MA4 196.81↑ 但 MA13 193.00↓、MA52 194.39↓，週線翻多須等 MA13 翻上（目前收盤距 MA13 +7.5%，若橫盤 1~2 週可望翻上）</li>
+<li><strong>60 分 b 墊高幅度放緩</strong>：211.39（04/21）→ 211.95（04/22）僅 +0.3%，短線衝高遇阻；04/22 收盤 207.60 已退回 60 分 MA5 附近</li>
+<li><strong>月線長線多頭</strong>：月 MA12 200.57↑、MA48 107.52↑ 遠離；月 b=260（2025-11 歷史高）為長線壓力，長線主升段修正中</li>
+<li><strong>V 反彈幅度</strong>：從 4/10 c=164.05 彈至 4/22 高 211.95，9 交易日漲 +29.2%；幅度大但 60 分節奏放緩</li>
+<li><strong>風險提醒</strong>：支撐依序 <strong>206.01（60m c）→ 203.68（MA5）→ 200.99（MA20）→ 194.01（MA60）→ 164.05（次箱底）</strong>；壓力依序 <strong>211.95（60m b／次高）→ 225.13（次箱頂）→ 229.15（前次箱頂）→ 260.00（歷史高）</strong></li>
+</ol>
+<div class="footer">箱波均控盤戰法分析報告 · 由 Claude Code 自動產出</div>
+</body>
+</html>
